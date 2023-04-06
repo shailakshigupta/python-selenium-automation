@@ -28,7 +28,6 @@ max([123,339,21])
 
 # 3. Count odd and even numbers.
 
-#n = "238645791"
 
 def odd_even(n):
     even = ""
@@ -43,8 +42,6 @@ def odd_even(n):
 
 a=odd_even("238645791")
 print(f"Even:{a[0]} , Odd:{a[1]}")
-
-
 
 
 
