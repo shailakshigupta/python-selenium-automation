@@ -1,20 +1,17 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from behave import given, when, then
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-service = Service("/Users/shailakshigupta/Desktop/Automation/python-selenium-automation/chromedriver")
-driver = webdriver.Chrome(service=service)
-
 
 
 @given('Open Amazon page')
 def open_amazon(context):
-    context.driver.get('https://www.amazon.com/')
+    #context.driver.get('https://www.amazon.com/')
+     context.app.main_page.open_main_url()
 
 @when('Click on Returns & Orders')
 def click_returns_orders(context):
-    context.driver.find_element(By.XPATH,"//a[@href='/gp/css/order-history?ref_=nav_orders_first']").click()
-
+    #context.driver.find_element(By.XPATH,"//a[@href='/gp/css/order-history?ref_=nav_orders_first']").click()
+     context.app.header.click_returns_orders()
 
 @then('Verify Amazon logo is shown')
 def logo(context):
@@ -22,10 +19,11 @@ def logo(context):
 
 
 @then('Verify Sign in header is visible')
-def sign_in_header(context):
-    expected_result = 'Sign in'
-    actual_result = context.driver.find_element(By.XPATH,"//h1[@class='a-spacing-small']").text
-    assert expected_result == actual_result, f'Expected {expected_result} but got this as Actual_result {actual_result}'
+def sign_in_header(context,expected_result):
+    context.app.signin_page.sign_in_header(expected_result)
+    #expected_result = 'Sign in'
+    #actual_result = context.driver.find_element(By.XPATH,"//h1[@class='a-spacing-small']").text
+    #assert expected_result == actual_result, f'Expected {expected_result} but got this as Actual_result {actual_result}'
 
 @then('Verify email input field is present')
 def input_field(context):
@@ -34,14 +32,16 @@ def input_field(context):
 
 @when('Click on cart button')
 def cart_button(context):
-    context.driver.find_element(By.ID,'nav-cart').click()
+    #context.driver.find_element(By.ID,'nav-cart').click()
+    context.app.main_page.cart_button()
 
 
-@then('Verify Amazon cart is empty')
-def cart_empty(context):
-    expected_result = 'Your Amazon Cart is empty'
-    actual_result = context.driver.find_element(By.XPATH,"//div[@class='a-row sc-your-amazon-cart-is-empty']").text
-    assert expected_result == actual_result, f'Expected_result {expected_result}but got this as Actual_result {actual_result}'
+@then('Verify that text "Your Amazon Cart is empty" is shown')
+def cart_empty(context,expected_result):
+    context.app.cart_page.cart_empty(expected_result)
+    #expected_result = 'Your Amazon Cart is empty'
+    #actual_result = context.driver.find_element(By.XPATH,"//div[@class='a-row sc-your-amazon-cart-is-empty']").text
+    #assert expected_result == actual_result, f'Expected_result {expected_result}but got this as Actual_result {actual_result}'
 
 
 @when('Input text teddy')

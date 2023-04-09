@@ -20,7 +20,7 @@ Feature: Test scenario for sign in when clicking returns and orders
   Scenario: User can view cart as empty
     Given Open Amazon page
     When Click on cart button
-    Then Verify Amazon cart is empty
+    Then Verify that text "Your Amazon Cart is empty" is shown
 
 
   Scenario: User can search for an item
